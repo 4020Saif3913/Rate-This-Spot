@@ -88,6 +88,7 @@
     }
 </style>
 <div
+<!-- used for Rate This Spot header -->
     style="
         width: 100%;
         height: 18%;
@@ -107,6 +108,7 @@
         align-items: flex-start;
         justify-content: start;
     ">
+    <!-- updates dashboard -->
     <div class = "dashboardLine">
         <h3>Dashboard</h3>
         <a href="addNewLocations.HTML" style="text-decoration: none">
@@ -123,6 +125,7 @@
     </div>
 </div>
 <script>
+<!-- get savedLocations -->
     function renderLocations() {
       const savedLocations = JSON.parse(localStorage.getItem('locations') || '[]');
       const list = document.getElementById('locationList');
@@ -133,6 +136,7 @@
         const card = document.createElement('div');
         card.className = 'card';
         card.style.cursor = 'pointer';
+        <!-- when review is clicked they are sent to review_new.html -->
         card.onclick = () => 
         {
             window.location.href = `review_new.html?i=${i}`;
