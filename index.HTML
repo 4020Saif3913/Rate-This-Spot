@@ -124,8 +124,9 @@
         <hr>
     </div>
 </div>
+<!-- gets savedLocations -->
+<!-- when review is clicked they are sent to review_new.html -->
 <script>
-<!-- get savedLocations -->
     function renderLocations() {
       const savedLocations = JSON.parse(localStorage.getItem('locations') || '[]');
       const list = document.getElementById('locationList');
@@ -136,7 +137,6 @@
         const card = document.createElement('div');
         card.className = 'card';
         card.style.cursor = 'pointer';
-        <!-- when review is clicked they are sent to review_new.html -->
         card.onclick = () => 
         {
             window.location.href = `review_new.html?i=${i}`;
