@@ -1,0 +1,114 @@
+<style>
+        h1
+        {
+            font-size: 50px;
+            padding: 20pt;
+            color: #374252;
+            margin-top: 200px;
+            margin-bottom: 200px;
+            margin-left: 200px;
+            margin-right: 200px;
+        }
+        label
+        {
+            font-size: 16px;
+            color: #787A7E;
+            margin-top: 6px;
+            display: block;
+        }
+        input, textarea
+        {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #787A7E;
+            border-radius: 8px;
+            background: #ffffff;
+            font-size: 16px;
+            gap: 30px, 
+        }
+        #formContainer
+        {
+            flex-grow: 1;
+        }
+        button
+        {
+            align-self: center;
+            padding: 10px 24px; 
+            background: #1B56DB;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            border-radius: 4pt;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+</style>
+<div
+    style="
+        width: 100%;
+        height: 18%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    ">
+    <div>
+        <h1>Add New Locations</h1>
+        <div id="formContainer">
+            <label for="locationName">Location Name</label>
+            <input type="text" id="locationName" placeholder="Your Location" />
+        
+            <label for="locationImage">Upload Image</label>
+            <input type="file" id="locationImage" accept="image/*" />
+        
+            <label for="rating">Overall Rating (1-5)</label>
+            <input type="number" id="rating" placeholder="Enter rating" min="1" max="5" />
+        
+            <label for="review">Written Review</label>
+            <textarea id="review" placeholder="Write your review here" rows="4"></textarea>
+        </div>
+        <button onclick="saveReview()">Save Review</button>
+    </div>
+<script>
+    function saveReview() 
+    {
+        const name = document.getElementById('locationName').value;
+        const imageInput = document.getElementById('locationImage');
+        const rating = parseInt(document.getElementById('rating').value);
+        const review = document.getElementById('review').value;
+    
+        if (!name || !imageInput.files[0] || !rating || !review) 
+        {
+            alert('Please fill out all fields and upload an image.');
+            return;
+        }
+    
+          const reader = new FileReader();
+          reader.onload = function (e) 
+          {
+            const newLocation = 
+            {
+              name,
+              rating,
+              review,
+              imageUrl: e.target.result
+            };
+    
+            const saved = JSON.parse(localStorage.getItem('locations') || '[]');
+            saved.push(newLocation);
+            localStorage.setItem('locations', JSON.stringify(saved));
+    
+            window.location.href = 'index.html';
+          };
+          reader.readAsDataURL(imageInput.files[0]);
+    }
+</script>
+</div>
+<div>
+    <div>
+        <hr>
+        <hr>
+    </div>
+</div>

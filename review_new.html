@@ -1,0 +1,124 @@
+<html>
+<head>
+<style>
+  h1
+  {
+    font-size: 50px;
+    padding: 20pt;
+    color: #374252;
+    margin-top: 100px;
+    margin-bottom: 90px;
+  }
+  .myDIV 
+  {
+    height:200px;
+    background-color:#FFFFFF;
+  }
+  .mymain div 
+  { 
+    text-align: center;
+  }
+  .all-location-ratings 
+  {
+    background-color:#FFFFFF;
+    display:inline;
+    
+  }
+  .rating-ul li
+  {
+    display: inline;
+    margin-left: 40px;
+  } 
+  .rating-ul{
+    margin-top: 50px;
+    border: #787A7E 1px solid;
+    border-radius: 4pt;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: left 100%, right 100%;
+    width: 90%;
+  }
+  .header-title{
+    width: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+  }
+  .rating-heading
+  {
+    font-size: 25px;
+    color: #787A7E;
+    margin-top: 50px;
+    margin-left: 10%;
+  }
+  .stars 
+  {
+    color: #FFC300;
+    font-size: 30px;
+  }
+  .poster-image{
+    height: 700px;
+    width: 50%;
+  }
+  a
+  {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #1B56DB;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-title">
+      <h1>Full Review</h1>
+</div>
+<hr>
+
+<!-- main ends -->
+
+<div style="margin-left: 10%;">
+  <h2 id="reviewCard"></h2>
+  
+  <div class="stars" id="starRating"></div>
+  <div class="rating-heading">
+    
+    
+  </div>
+  
+</div>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const index = params.get("i");
+    const locations = JSON.parse(localStorage.getItem("locations") || "[]");
+
+    if (index !== null && locations[index]) 
+    {
+      const loc = locations[index];
+      document.getElementById("reviewCard").innerHTML = `
+        <img class="poster-image" src="${loc.imageUrl}" alt="Location image" />
+        <div class="mymain">
+        <div class="all-location-ratings">
+          <ul class="rating-ul">
+              <li>&#8227; <a href="#" class="a_top_hypers"> Ratings</a></li>
+              <li>&#8227; <a href="#" class="a_top_hypers"> All Reviews</a></li>
+              <li>&#8227; <a href="#" class="a_top_hypers"> View All Photos</a></li>
+          </ul>
+      </div>
+      </div> 
+        <h2>${loc.name}</h2>
+        <div class="stars"><h3 style="color:#787A7E;">Overall Rating</h3>${'★'.repeat(loc.rating)}${'☆'.repeat(5 - loc.rating)}</div>
+        <div> <h4 style="color:#787A7E;">Written Review</h4>
+        <textarea id="writtenReview" rows="10" style="width: 70%;height: 7%; border-radius: 4pt;" readonly>${loc.review}</textarea>
+      `;
+    } else 
+    {
+      document.getElementById("reviewCard").innerHTML = "<p>Review not found.</p>";
+    }
+</script>
+<a href="index.HTML"> Back To Dashboard</a>
+</body>
+</html>

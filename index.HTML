@@ -1,0 +1,156 @@
+<style>
+    h1
+    {
+        font-size: 50px;
+        padding: 20pt;
+        color: #374252;
+        margin-top: 200px;
+        margin-bottom: 200px;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+    h3
+    {
+        font-size: 25px;
+        color: #787A7E;
+    }
+    .add-button 
+    {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #787A7E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #787A7E;
+        cursor: pointer;
+        background-color: #ffffff;
+    }
+    .dashboardLine
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .card 
+    {
+        background: #ffffff;
+        border: 1px solid #787A7E;
+        border-radius: 10px;
+        padding: 12px;
+        margin: 15px auto;
+        width: 90%;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        box-shadow: 0 2px 5px #787A7E;
+        margin-top: 45px;
+        margin-bottom: 45px;
+    }
+    .image-box 
+    {
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+    }
+    .image-box img 
+    {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+    .card div:last-child 
+    {
+        flex-grow: 1;
+    }
+    .card strong 
+    {
+        font-size: 16px;
+        color: #374252;
+    }
+    .card em 
+    {
+        display: block;
+        margin-top: 5px;
+        color: #787A7E;
+        font-size: 14px;
+    }
+    .stars 
+    {
+        color: #FFC300;
+        font-size: 14px;
+    }
+</style>
+<div
+    style="
+        width: 100%;
+        height: 18%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    ">
+    <div>
+        <h1>Rate This Spot</h1>
+    </div>
+</div>
+<div
+    style="
+        width: 100%;
+        height: 4%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: start;
+    ">
+    <div class = "dashboardLine">
+        <h3>Dashboard</h3>
+        <a href="addNewLocations.HTML" style="text-decoration: none">
+            <div class = "add-button" >+</div>
+        </a>
+    </div>
+</div>
+<div>
+</div>
+<div>
+    <div>
+        <hr>
+        <hr>
+    </div>
+</div>
+<script>
+    function renderLocations() {
+      const savedLocations = JSON.parse(localStorage.getItem('locations') || '[]');
+      const list = document.getElementById('locationList');
+      list.innerHTML = '';
+  
+      savedLocations.forEach((loc, i) => 
+      {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.cursor = 'pointer';
+        card.onclick = () => 
+        {
+            window.location.href = `review_new.html?i=${i}`;
+        };
+        card.innerHTML = `
+            <div class="image-box">
+                <img src="${loc.imageUrl}" alt="Location image" />
+            </div>
+            <div>
+                <strong>${loc.name}</strong>
+                <div class="stars">${'★'.repeat(loc.rating)}${'☆'.repeat(5 - loc.rating)}</div>
+                <em>${loc.review}</em>
+            </div>
+        `;
+        list.appendChild(card);
+      });
+    }
+  
+    document.addEventListener('DOMContentLoaded', renderLocations);
+</script>
+<div class="content" id="locationList"></div>
