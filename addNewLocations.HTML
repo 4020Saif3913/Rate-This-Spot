@@ -55,6 +55,7 @@
         justify-content: center;
     ">
     <div>
+        <!-- Lables used for showing what needs to be entered -->
         <h1>Add New Locations</h1>
         <div id="formContainer">
             <label for="locationName">Location Name</label>
@@ -72,6 +73,7 @@
         <button onclick="saveReview()">Save Review</button>
     </div>
 <script>
+<!-- compress function to compress the image -->
     function compressImage(file, callback)
     {
         const reader = new FileReader();
@@ -113,6 +115,7 @@
         reader.readAsDataURL(file);
     }
     function saveReview() 
+        <!-- previous save function with compression function added -->
     {
         const name = document.getElementById('locationName').value;
         const imageInput = document.getElementById('locationImage');
@@ -133,7 +136,7 @@
                 review,
                 imageUrl: compressedDataUrl
             };
-
+                <!-- saved to local storage -->
             const saved = JSON.parse(localStorage.getItem('locations') || '[]');
             saved.push(newLocation);
             localStorage.setItem('locations', JSON.stringify(saved));
